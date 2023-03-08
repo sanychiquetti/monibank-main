@@ -10,5 +10,5 @@ function validaIdade(data){
    const dataAtual = new Date();    //aqui ele vai pegar a data atual do dia
    const dataMais18 = new Date(data.getUTCFullYear() + 18, data.getUTCMonth(), data.getUTCDate()); // aqui estamos pegando a data,dia, mes e ano digitado e colocando + 18,
 
-   return dataAtual >= dataMais18;   // aqui estamos fazendo a comparação da data inserida +18 com a data do dia, se for maoir ou igual, ele pode se cadastrar.
+   return dataAtual >= dataMais18;   // aqui estamos fazendo a comparação da data inserida +18 com a data do dia, se for maior ou igual, ele pode se cadastrar.
 }

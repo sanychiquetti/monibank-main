@@ -16,7 +16,7 @@ formulario.addEventListener("submit", (e) =>{ // colocamos uma escuta, que qdo f
       "email": e.target.elements["email"].value,
       "rg": e.target.elements["rg"].value,
       "cpf": e.target.elements["cpf"].value,
-      "aniversario": e.target.elements["aniversario"].value,
+      "aniversario": e.target.elements["aniversario"].value
    }
       //depois de pegar esses valores e salvar em uma lista, fizemos o armazenamento local
    localStorage.setItem("cadastro", JSON.stringify(listaRespostas));

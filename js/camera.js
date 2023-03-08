@@ -5,6 +5,7 @@ const video = document.querySelector("[data-video]"); // selecionei o campo de v
 const botaoTirarFoto = document.querySelector("[data-tirar-foto]"); // selecionando o botão de tirar a foto
 const canvas = document.querySelector("[data-video-canvas]"); // selecionando o canvas para guardar a foto
 const mensagem = document.querySelector("[data-mensagem]"); // selecionando a mensagem de sucesso 
+const botaoEnviarFoto = document.querySelector("[data-enviar]"); // selecionando o botao enviar
 
 let imagemURL = ""; // criar a variável que vai guardar a foto
 
@@ -21,12 +22,24 @@ botaoIniciarCamera.addEventListener("click", async function (){
    video.srcObject = iniciarVideo;
 })
 
-// agora vamo fazer a função tirar foto:
-botaoTirarFoto.addEventListener("click", function() {
+// agora vamos fazer a função tirar foto:
+botaoTirarFoto.addEventListener("click", function() { //colocando a escuta no botao
    canvas.getContext('2d').drawImage(video, 0, 0, canvas.Width, canvas.height);
 
    imagemURL = canvas.toDataURL("image/jpeg"); // vai tirar a foto e guardar na variavel criada
 
    campoCamera.style.display = "none";
    mensagem.style.display = "block";
+})
+
+// agora vamos fazer a funcao enviar:
+botaoEnviarFoto.addEventListener("click", () =>{
+   const receberDadosExistentes = localStorage.getItem("cadastro");
+   const converterRetorno = JSON.parse(receberDadosExistentes);
+
+   converterRetorno.imagem = imagemURL;
+
+   localStorage.setItem('cadastro', JSON.stringify(converterRetorno));
+
+   window.location.href = "./abrir-conta-form-3.html";
 })
