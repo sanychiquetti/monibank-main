@@ -5,8 +5,9 @@
 //1 o que vamos substituir, o 2 pelo que vamos substituir
 export default function ehUmCPF(campo) {
    const cpf = campo.value.replace(/\.|-/g, ""); // aqui estou pegando os caractres especiais e removendo e substituindo por nada
-   validaNumerosRepetidos(cpf); // aqui chamamos a função de validar os números repetidos
-   validaPrimeiroDigito(cpf); // aqui chamamos a função validar primeiro numero
+   if (validaNumerosRepetidos(cpf) || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)){ // aqui chamamos a função de validar os números repetidos, o primeiro e segundo digito
+      campo.setCustomValidity('Esse CPF não é válido!');
+   }
 }
 // para ela funcionar, devemos exportar essa função para o script
 
@@ -46,5 +47,26 @@ function validaPrimeiroDigito(cpf){
    }
 
    return soma != cpf[9];
+
+}
+
+// Validar o segundo digito:
+function validaSegundoDigito(cpf){
+   let soma = 0;            //criar variável soma
+   let multiplicador = 11;  //criar variável multiplicador
+
+ //vamos pegar os 9 primeiros digitos do cpf,criar um laço de repetição para todos esses 10 digitos
+   for(let tamanho = 0; tamanho < 10; tamanho++){
+      soma += cpf[tamanho] * multiplicador; // ela vai pegar a variável soma, que demos valor 0, e começar a * pelo valor do multiplicador, que demos o valor 10
+      multiplicador--;  // ele vai diminuir o multiplicador: 10,9,8,7.... e no final somar esses valores (vide resumo no "notes"))
+   }
+
+   soma = (soma * 10) % 11;  // aqui ele vai pegar a soma e * por 10 e dividir por 11
+
+   if (soma == 10 || soma == 11){  // aqui estamos pedindo para que compare a soma com 10 e com 11
+      soma = 0;                    // se o resultado der 10 ou 11, então seria = a 0, o que tornaria inválido.  
+   }
+
+   return soma != cpf[10];
 
 }
